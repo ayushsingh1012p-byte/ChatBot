@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(49, 46, 46);
+    font-family: Arial, sans-serif;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user, .bot {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.user {
+    background-color: aliceblue;
+    color: black;
+    align-self: flex-end; /* Moves to right */
+}
+
+.bot {
+    background-color: #333;
+    color: lightgreen;
+    align-self: flex-start; /* Moves to left */
+}
