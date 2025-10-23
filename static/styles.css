@@ -19,11 +19,11 @@ body {
 .user {
     background-color: aliceblue;
     color: black;
-    align-self: flex-end; /* Moves to right */
+    align-self: flex-end; 
 }
 
 .bot {
     background-color: #333;
     color: lightgreen;
-    align-self: flex-start; /* Moves to left */
+    align-self: flex-start; 
 }
