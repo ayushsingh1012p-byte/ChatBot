@@ -17,7 +17,7 @@ body {
 }
 
 .user {
-    background-color: aliceblue;
+    background-color: rgb(141, 202, 255);
     color: black;
     align-self: flex-end; 
 }
