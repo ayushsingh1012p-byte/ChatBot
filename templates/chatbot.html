@@ -43,12 +43,28 @@
         const input = document.getElementById("user-input");
         const message = input.value.trim();
         if (!message) return;
+
+        const chatBody = document.querySelector(".card-body");
+
+      
         const userMsg = document.createElement("div");
         userMsg.className = "user";
         userMsg.textContent = message;
-        document.querySelector(".card-body").appendChild(userMsg);
+        chatBody.appendChild(userMsg);
         input.value = "";
 
+        // 🤖 Thinking animation
+        const botMsg = document.createElement("div");
+        botMsg.className = "bot thinking";
+        botMsg.innerHTML = `
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        `;
+        chatBody.appendChild(botMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        
         fetch("{% url 'chat_api' %}", {
             method: "POST",
             headers: {
@@ -59,13 +75,18 @@
         })
             .then(response => response.json())
             .then(data => {
-                const botMsg = document.createElement("div");
-                botMsg.className = "bot";
-                botMsg.textContent = data.reply;
-                document.querySelector(".card-body").appendChild(botMsg);
-                document.querySelector(".card-body").scrollTop = document.querySelector(".card-body").scrollHeight;
+                // Replace thinking dots with actual reply
+                botMsg.classList.remove("thinking");
+                botMsg.textContent = data.reply || "⚠️ (No response)";
+                chatBody.scrollTop = chatBody.scrollHeight;
+            })
+            .catch(error => {
+                botMsg.classList.remove("thinking");
+                botMsg.textContent = "⚠️ Error connecting to server.";
+                console.error(error);
             });
     }
 </script>
+
 
 </html>
