@@ -9,6 +9,9 @@ import json
 import random
 
 import nltk
+nltk.download('punkt', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('omw-1.4', quiet=True)
 import numpy as np
 
 import torch
