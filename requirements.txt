@@ -1,0 +1,12 @@
+django
+djangorestframework
+whitenoise
+Pillow
+transformers
+torch
+numpy
+torchvision
+torchaudio
+nltk
+
+
