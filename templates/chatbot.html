@@ -2,79 +2,99 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTBIT Chatbot</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
-<body>
-<input type="hidden" id="csrf-token" value="{% csrf_token %}">
 
-<div class="container py-5 d-flex justify-content-center align-items-center">
-    <div class="chat-card shadow-lg">
-        <div class="chat-header text-center">🎓 GTBIT Chatbot</div>
-        <div class="chat-body d-flex flex-column" id="chat-body">
-            {% for msg in messages %}
+<body>
+    <div class="container py-5 d-flex justify-content-center align-items-center">
+        <div class="chat-card shadow-lg">
+
+            <div class="chat-header text-center">
+                🎓 GTBIT Chatbot
+            </div>
+
+            <div class="chat-body d-flex flex-column" id="chat-body">
+                {% for msg in messages %}
                 <div class="{{ msg.sender }}">{{ msg.message }}</div>
-            {% endfor %}
-        </div>
-        <div class="chat-footer d-flex">
-            <input type="text" class="form-control me-2" id="user-input" placeholder="Type your message here...">
-            <button class="btn btn-primary" type="submit" onclick="sendMessage()">Send</button>
+                {% endfor %}
+            </div>
+
+
+            <div class="chat-footer d-flex">
+                <input type="text" class="form-control me-2" id="user-input" placeholder="Type your message here...">
+                <button class="btn btn-primary" type="submit" onclick="sendMessage()">Send</button>
+            </div>
+
         </div>
     </div>
-</div>
 
-<script>
-function sendMessage() {
-    const input = document.getElementById("user-input");
-    const message = input.value.trim();
-    if (!message) return;
-    const chatBody = document.getElementById("chat-body");
-    const userMsg = document.createElement("div");
-    userMsg.className = "user";
-    userMsg.textContent = message;
-    chatBody.appendChild(userMsg);
-    input.value = "";
-    chatBody.scrollTop = chatBody.scrollHeight;
-    const botMsg = document.createElement("div");
-    botMsg.className = "bot thinking";
-    botMsg.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
-    chatBody.appendChild(botMsg);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    const csrftoken = document.getElementById("csrf-token").value;
-    fetch("{% url 'chat_api' %}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": csrftoken
-        },
-        body: `message=${encodeURIComponent(message)}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        botMsg.classList.remove("thinking");
-        botMsg.textContent = data.reply || "⚠️ (No response)";
-        chatBody.scrollTop = chatBody.scrollHeight;
-    })
-    .catch(error => {
-        botMsg.classList.remove("thinking");
-        botMsg.textContent = "⚠️ Error connecting to server.";
-        console.error(error);
-    });
-}
+   
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("user-input");
+            const message = input.value.trim();
+            if (!message) return;
+            const chatBody = document.getElementById("chat-body");
 
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("user-input");
-    input.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            sendMessage();
+
+            const userMsg = document.createElement("div");
+            userMsg.className = "user";
+            userMsg.textContent = message;
+            chatBody.appendChild(userMsg);
+            input.value = "";
+           
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+    
+            const botMsg = document.createElement("div");
+            botMsg.className = "bot thinking";
+            botMsg.innerHTML = `
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            `;
+            chatBody.appendChild(botMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            
+            fetch("{% url 'chat_api' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    
+                    botMsg.classList.remove("thinking");
+                    botMsg.textContent = data.reply || "⚠️ (No response)";
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                })
+                .catch(error => {
+                    botMsg.classList.remove("thinking");
+                    botMsg.textContent = "⚠️ Error connecting to server.";
+                    console.error(error);
+                });
         }
-    });
-});
-</script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById("user-input");
+            input.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+                    sendMessage();
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
