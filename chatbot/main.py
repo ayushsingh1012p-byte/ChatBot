@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 
-# Download required NLTK data silently
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
