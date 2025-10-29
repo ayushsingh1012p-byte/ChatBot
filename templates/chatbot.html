@@ -65,7 +65,7 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             
-            fetch("{% url 'chat_api' %}", {
+            fetch("/chat-api/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
