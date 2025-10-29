@@ -8,5 +8,4 @@ numpy
 torchvision
 torchaudio
 nltk
-
-
+django-environ
