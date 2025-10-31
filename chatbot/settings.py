@@ -38,9 +38,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "*"
 ]
-CSRF_TRUSTED_ORIGINS = [
-    "https://gtbitchatbot.onrender.com"
-]
+
 
 
 
@@ -149,3 +147,10 @@ STATICFILES_DIRS = [
 
 # Folder where Django will collect all static files for production
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://gtbitchatbot.onrender.com"
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
+
