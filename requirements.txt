@@ -2,10 +2,9 @@ django
 whitenoise
 Pillow
 transformers
-torch==2.2.0+cpu
-torchvision==0.17.0+cpu
-torchaudio==2.2.0+cpu
--f https://download.pytorch.org/whl/cpu
+torch
+torchvision
+torchaudio
 numpy
 nltk
 django-environ
