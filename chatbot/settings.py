@@ -39,7 +39,7 @@ ALLOWED_HOSTS = [
     "*"
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://gtbit-chatbot.onrender.com"
+    "https://gtbitchatbot.onrender.com"
 ]
 
 
@@ -54,9 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chats',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
