@@ -1,5 +1,4 @@
 django
-djangorestframework
 whitenoise
 Pillow
 transformers
@@ -9,3 +8,5 @@ torchvision
 torchaudio
 nltk
 django-environ
+django-cors-headers
+
