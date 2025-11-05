@@ -146,18 +146,11 @@ STATICFILES_DIRS = [
 ]
 
 
-<<<<<<< HEAD
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-=======
-# Folder where Django will collect all static files for production
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
-    "https://gtbitchatbot.onrender.com"
+    "*"
 ]
 
 
-
->>>>>>> 83becf34a971fd3e243ea96819622f52f8f59270
