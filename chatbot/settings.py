@@ -13,11 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from environ import Env
 import os
-env = Env()
-Env.read_env()
 
-ENVIRONMENT = env("ENVIRONMENT", default='development')
-ENVIRONMENT = "production"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,18 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = "django-insecure-+cut+75@zsc@0d6=w*#phdk7rlf+)w(qiway4x-$6!-#o=03$f"
 
-if ENVIRONMENT == 'development':
-    DEBUG = True
-
-else: 
-    DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = [
      "localhost",
     "127.0.0.1",
-    "*"
+    "https://gtbitchatbot.onrender.com",
+    "*",
 ]
 
 
