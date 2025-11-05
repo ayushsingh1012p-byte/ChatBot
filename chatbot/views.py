@@ -9,6 +9,8 @@ from torch.utils.data import DataLoader, TensorDataset
 
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
+nltk.download('punkt_tab', quiet=True) 
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INTENTS_PATH = os.path.join(BASE_DIR, "intents.json")
