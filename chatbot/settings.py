@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from environ import Env
+import os
 env = Env()
 Env.read_env()
 
@@ -141,5 +142,6 @@ STATICFILES_DIRS = [
 ]
 
 
-# Folder where Django will collect all static files for production
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+MEDIA_URLS ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
