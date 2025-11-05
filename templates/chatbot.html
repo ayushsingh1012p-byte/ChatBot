@@ -65,26 +65,25 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             
-            fetch("{% url 'chat_api' %}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: `message=${encodeURIComponent(message)}`
-            })
-                .then(response => response.json())
-                .then(data => {
-                    
-                    botMsg.classList.remove("thinking");
-                    botMsg.textContent = data.reply || "⚠️ (No response)";
-                    chatBody.scrollTop = chatBody.scrollHeight;
-                })
-                .catch(error => {
-                    botMsg.classList.remove("thinking");
-                    botMsg.textContent = "⚠️ Error connecting to server.";
-                    console.error(error);
-                });
+            fetch("/chat-api/", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": "{{ csrf_token }}"
+    },
+    body: new URLSearchParams({ message: message })
+})
+.then(response => {
+    if (!response.ok) {
+        console.error("Server error:", response.status);
+        return response.text();  // RETURN FULL HTML ERROR PAGE
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("RAW RESPONSE:", data);
+});
+
         }
         document.addEventListener("DOMContentLoaded", function () {
             const input = document.getElementById("user-input");
